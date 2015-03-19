@@ -17,16 +17,17 @@ makeCacheMatrix <- function(x = matrix()) {
    get <- function() return(x)
    set_inverse <- function(inv) inverse <<- inv
    get_inverse <- function() return(inverse)
-   return(list( set = set, 
-         get = get, 
-         set_inverse = set_inverse, 
-         get_inverse = get_inverse))
+   return(list( 
+      set = set, 
+      get = get, 
+      set_inverse = set_inverse, 
+      get_inverse = get_inverse))
 }
 
 
-## This function check if the inverse has already been calculated (and the 
-## matrix has not changed), then it retrieves the inverse from the cache. 
-## Otherwise it will call makeCacheMatrix function above to cache its inverse. 
+## This function computes the inverse of the special "matrix" returned by 
+## `makeCacheMatrix` above.If the inverse has already been calculated (and the 
+## matrix has not changed), then it retrieves the inverse from the cache.  
 cacheSolve <- function(x, ...) {
    inverse <- x$get_inverse()
    if(!is.null(inverse)) {
